@@ -16,11 +16,13 @@ python main.py path/to/logfile
 ## Output
 The script generates a CSV file in the same directory as the log file with the same base name.
 
-## Log File Format Constraints
-The script expects each log entry to be in the format `key=value` or `key="value"`. Please be aware of the following constraints regarding the log file format:
-- **Double Quotes (")**: If a value contains double quotes, they should be escaped. Unescaped double quotes might be interpreted as the end of a value.
-- **Commas (,)**: Since commas are used as field separators in CSV files, any commas within a value should be enclosed in double quotes to ensure correct parsing.
-- **Equals Sign (=)**: The equals sign is used to separate keys from values. If a key or value contains an equals sign, the script might incorrectly parse the entry.
+## Log File Format and Limitations
+The script expects each log entry to be in the format `key=value` or `key="value"`. However, the current implementation does not support escape sequences within the log file. Therefore, please be aware of the following limitations:
+- **Double Quotes (")**: The script does not support escaped double quotes within values. Values should not contain unescaped double quotes as they may lead to parsing errors.
+- **Commas (,)**: If a value contains commas, it should be enclosed in double quotes. However, the script does not support commas within values that are not enclosed in double quotes.
+- **Equals Sign (=)**: The script uses the equals sign to separate keys from values. Keys or values containing equals signs may be incorrectly parsed.
+
+Users should ensure that their log files conform to these format requirements for proper parsing and conversion into CSV format.
 
 ## Error Handling
 The script includes basic error handling for file not found and I/O errors.
